@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Per Virginia ❤️</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            background: linear-gradient(135deg, #ff758c, #ff7eb3);
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        .screen {
+            width: 100%;
+            max-width: 500px;
+            min-height: 100vh;
+            padding: 30px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            animation: fadeIn 0.7s ease;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        h1 {
+            font-size: 42px;
+            margin: 0 0 15px;
+        }
+
+        h2 {
+            font-size: 30px;
+            margin-bottom: 30px;
+        }
+
+        p {
+            font-size: 18px;
+            line-height: 1.5;
+        }
+
+        button {
+            border: none;
+            border-radius: 30px;
+            padding: 16px 28px;
+            margin: 8px;
+            font-size: 17px;
+            font-weight: 600;
+            cursor: pointer;
+            background: white;
+            color: #ff4f7b;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+            transition: 0.2s;
+        }
+
+        button:active {
+            transform: scale(0.94);
+        }
+
+        .answers {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            max-width: 350px;
+        }
+
+        .answers button {
+            width: 100%;
+        }
+
+        .gift {
+            font-size: 120px;
+            cursor: pointer;
+            animation: floating 2s infinite ease-in-out;
+            margin: 25px 0;
+        }
+
+        .error {
+            font-size: 18px;
+            margin-top: 15px;
+            animation: shake 0.4s;
+        }
+
+        .final-title {
+            font-size: 38px;
+            font-weight: 800;
+        }
+
+        .spa {
+            background: rgba(255,255,255,0.18);
+            border: 1px solid rgba(255,255,255,0.35);
+            border-radius: 25px;
+            padding: 25px;
+            margin-top: 20px;
+            backdrop-filter: blur(10px);
+        }
+
+        .spa h2 {
+            margin: 0 0 10px;
+        }
+
+        .hearts {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+        }
+
+        .heart {
+            position: absolute;
+            bottom: -30px;
+            font-size: 25px;
+            animation: rise 4s linear forwards;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(15px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes floating {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-12px);
+            }
+        }
+
+        @keyframes shake {
+            0%, 100% {
+                transform: translateX(0);
+            }
+            25% {
+                transform: translateX(-10px);
+            }
+            75% {
+                transform: translateX(10px);
+            }
+        }
+
+        @keyframes rise {
+            from {
+                transform: translateY(0) rotate(0deg);
+                opacity: 1;
+            }
+            to {
+                transform: translateY(-110vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="hearts" id="hearts"></div>
+
+    <!-- PAGINA INIZIALE -->
+    <section class="screen" id="start">
+
+        <h1>💕 Ciao Virginia</h1>
+
+        <p>
+            Ho preparato una piccola sorpresa per te...
+        </p>
+
+        <p>
+            Ma prima devi superare una prova.
+        </p>
+
+        <button onclick="startQuiz()">
+            INIZIA ❤️
+        </button>
+
+    </section>
+
+
+    <!-- QUIZ -->
+    <section class="screen hidden" id="quiz">
+
+        <h2>Quanto mi ami? ❤️</h2>
+
+        <p>
+            Scegli la risposta corretta.
+        </p>
+
+        <div class="answers">
+
+            <button onclick="wrongAnswer()">
+                🤏 Un pochino
+            </button>
+
+            <button onclick="wrongAnswer()">
+                ❤️ Abbastanza
+            </button>
+
+            <button onclick="wrongAnswer()">
+                🥰 Tantissimo
+            </button>
+
+            <button onclick="correctAnswer()">
+                ♾️ Più di quanto tu possa immaginare
+            </button>
+
+        </div>
+
+        <div id="error"></div>
+
+    </section>
+
+
+    <!-- REGALO -->
+    <section class="screen hidden" id="giftScreen">
+
+        <h2>❤️ Risposta esatta!</h2>
+
+        <p>
+            Sapevo che avresti scelto questa.
+        </p>
+
+        <p>
+            Ora c'è qualcosa per te...
+        </p>
+
+        <div class="gift" onclick="openGift()">
+            🎁
+        </div>
+
+        <p>
+            Tocca il regalo
+        </p>
+
+    </section>
+
+
+    <!-- RISULTATO -->
+    <section class="screen hidden" id="final">
+
+        <div class="final-title">
+            🎉 HAI VINTO! 🎉
+        </div>
+
+        <div class="spa">
+
+            <h2>🧖‍♀️ SPA 🧖‍♂️</h2>
+
+            <h2>Virginia Resort</h2>
+
+            <p>
+                Hai appena vinto un buono per
+                <strong>una giornata / serata in SPA</strong>
+                insieme a me. ❤️
+            </p>
+
+            <p>
+                📅 La data la scegliamo insieme.
+            </p>
+
+            <p>
+                Perché il regalo più bello è
+                passare del tempo insieme.
+            </p>
+
+        </div>
+
+        <p style="margin-top: 30px;">
+            Ti amo ❤️
+        </p>
+
+    </section>
+
+
+    <script>
+
+        function showScreen(id) {
+
+            document.querySelectorAll(".screen").forEach(screen => {
+                screen.classList.add("hidden");
+            });
+
+            document.getElementById(id).classList.remove("hidden");
+        }
+
+
+        function startQuiz() {
+            showScreen("quiz");
+        }
+
+
+        function wrongAnswer() {
+
+            const error = document.getElementById("error");
+
+            error.innerHTML = "❌ Ma sei seria? 😭<br>Riprova.";
+
+            error.className = "error";
+
+            setTimeout(() => {
+                error.innerHTML = "";
+            }, 2000);
+        }
+
+
+        function correctAnswer() {
+
+            showScreen("giftScreen");
+
+            createHearts();
+        }
+
+
+        function openGift() {
+
+            showScreen("final");
+
+            createHearts();
+            createHearts();
+            createHearts();
+
+        }
+
+
+        function createHearts() {
+
+            const container = document.getElementById("hearts");
+
+            for (let i = 0; i < 15; i++) {
+
+                const heart = document.createElement("div");
+
+                heart.className = "heart";
+
+                heart.innerHTML = Math.random() > 0.5 ? "❤️" : "💕";
+
+                heart.style.left = Math.random() * 100 + "%";
+
+                heart.style.animationDuration =
+                    (3 + Math.random() * 3) + "s";
+
+                heart.style.fontSize =
+                    (18 + Math.random() * 20) + "px";
+
+                container.appendChild(heart);
+
+                setTimeout(() => {
+                    heart.remove();
+                }, 6000);
+            }
+        }
+
+    </script>
+
+</body>
+</html>
